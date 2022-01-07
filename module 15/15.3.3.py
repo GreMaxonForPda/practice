@@ -1,32 +1,16 @@
-wordList = []
-textList = []
-textWord = ''
-counter = [0, 0, 0]
-temp = 0
-wordCount = 3
+scores_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
-def textAdd():
-    global textWord
-    textWord = input('Слово из текста: ')
-    textList.append(textWord)
+minimum = 0
+maximum = 0
+index = 0
 
-for i in range(wordCount):
-    print('Введите', i + 1, 'слово: ', end = '')
-    wordList.append(input())
+for _ in scores_list:
+    if scores_list[minimum] > _:
+        minimum = index
+    elif scores_list[maximum] < _:
+        maximum = index
+    index += 1
 
-print()
+scores_list[minimum], scores_list[maximum] = scores_list[maximum], scores_list[minimum]
 
-textAdd()
-while textWord != 'end':
-    textAdd()
-
-for i in wordList:
-    for x in textList:
-        if i == x:
-           counter[temp] += 1
-    temp += 1
-
-print()
-
-for i in range(wordCount):
-    print(wordList[i] + ':', counter[i])
+print('\n', scores_list)

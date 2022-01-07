@@ -1,23 +1,17 @@
-userString = input('Введите строку: ')
-userSymbol = int(input('Номер символа: '))
+numbers_count = int(input('Сколько будет чисел? '))
+numbers_list = []
+summ_indexes = 0
 
-rightSymbol = ''
-leftSymbol = ''
-symbolCount = 0
-tempList = list(userString)
+for _ in range(numbers_count):
+    temp = int(input('Введите ' + str(_ + 1) + ' число: '))
+    numbers_list.append(temp)
 
-for i in tempList:
-    if i == tempList[userSymbol - 1]:
-        symbolCount += 1
+divider = int(input('\nВведите делитель: '))
+print()
 
-leftSymbol = tempList[userSymbol - 2]
-rightSymbol = tempList[userSymbol]
+for _ in range(numbers_count):
+    if numbers_list[_] % divider == 0:
+        print('Индекс числа ' + str(numbers_list[_]) + ':', _)
+        summ_indexes += _
 
-print('\nСимвол слева:', leftSymbol , '\nСимвол справа:', rightSymbol)
-
-if tempList[userSymbol - 1] == leftSymbol == rightSymbol:
-    print('\nЕсть два таких же символа среди соседей.')
-elif tempList[userSymbol - 1] == leftSymbol or tempList[userSymbol - 1] == rightSymbol:
-    print('\nЕсть ровно один такойже символ среди соседей.')
-else:
-    print('\nТаких же символов нет среди соседей.')
+print('Сумма индексов:', _)

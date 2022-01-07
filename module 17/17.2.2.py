@@ -1,5 +1,10 @@
-original_prices = [1.25, -9.45, 10.22, 3.78, -5.92, 1.16]
+joke_symbol = input('Введите доп.символ: ')
 
-new_list = [i_price for i_price in original_prices if i_price > 0]
+print('\n', '*' * 7, 'user input', '*' * 7)
 
-print('Исправленный список:', new_list)
+user_string = input('\nВведите сообщение: ')
+
+double_us = [i_symbol * 2 for i_symbol in user_string]
+dus_and_js = [j_symbol + joke_symbol for j_symbol in double_us]
+
+print('\nСписок удвоенных символов:', double_us, '\nСклейка с дополнительным символом:', dus_and_js)

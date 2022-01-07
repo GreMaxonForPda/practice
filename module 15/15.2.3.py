@@ -1,16 +1,19 @@
-scores_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+id_count = int(input('Введите кол-во сотрудников в офисе: '))
+id_list = []
 
-minimum = 0
-maximum = 0
-index = 0
+for _ in range(id_count):
+    id_list.append(int(input('ID сотрудника: ')))
 
-for _ in scores_list:
-    if scores_list[minimum] > _:
-        minimum = index
-    elif scores_list[maximum] < _:
-        maximum = index
-    index += 1
+ask = int(input('\nКакого сотрудника ищем (ID)? '))
 
-scores_list[minimum], scores_list[maximum] = scores_list[maximum], scores_list[minimum]
+for _ in id_list:
+    if _ == ask:
+        temp = True
+        break
+    else:
+        temp = False
 
-print('\n', scores_list)
+if temp:
+    print('Сотрудник на месте.')
+else:
+    print('Сотрудник не работает!')
