@@ -12,3 +12,7 @@ for y in sorted(hist):
         y,
         hist[y]
     ))
+
+print('Максимальная частота: {}'.format(
+    max(hist.values())
+))
