@@ -1,2 +1,2 @@
 # practice
-My practice for skillbox
+Python Practice
