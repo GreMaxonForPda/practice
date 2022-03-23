@@ -1,0 +1,1692 @@
+/home/gremaxon/PycharmProjects/python_basic/Module21/05_make_function_faster/main.py
+def calculating_math_func(data):
+    if data in factorials:
+        result = factorials[data]
+    else:
+        result = 1
+        for index in range(1, data + 1):
+            result *= index
+        factorials[data] = result
+    result /= data ** 3
+    result = result ** 10
+    return result
+
+
+factorials = {}
+while True:
+    s = int(input('Введите число факториал которого надо найти: '))
+    print(calculating_math_func(s))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/09_hanoi_towers/main.py
+# TODO здесь писать код
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/01_challenge_2/main.py
+def challenge(i_num, start=1):
+    if start <= i_num:
+        print(start)
+        challenge(i_num, start + 1)
+
+
+number = int(input("Введите num: "))
+challenge(number)
+
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/02_my_zip_2/main.py
+def sort_func(*args):
+    sort_massiw = len(sorted(args, key=len)[0])
+    return range(sort_massiw)
+
+
+def my_zip_function(first, second):
+    new_zip = ((first[i], second[i]) for i in sort_func(first, second))
+    return new_zip
+
+
+a = [1, 2, 3, 4, 5]
+b = {1: 's', 2: 'q', 3: 4}
+output = my_zip_function(a, b)
+print(output)
+
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/08_list_of_lists_2/main.py
+nice_list = [1, 2, [3, 4], [[5, 6, 7], [8, 9, 10]],
+             [[11, 12, 13], [14, 15], [16, 17, 18]]]
+
+
+def list_of_list(iterable, output=[]):
+    for sub_elem in iterable:
+        if not isinstance(sub_elem, list):
+            output.append(sub_elem)
+        else:
+            list_of_list(sub_elem, output)
+
+    return output
+
+
+print(list_of_list([1, 2, [3, 4], [[5, 6, 7], [8, 9, 10]], [[11, 12, 13], [14, 15], [16, 17, 18]]]))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/03_fibonacci/main.py
+def fibonacci(numm, old_num=0, return_num=1):
+    if numm == 1:
+        return return_num
+    else:
+        old_num, return_num = return_num, return_num + old_num
+        return fibonacci(numm-1, old_num, return_num)
+
+
+num_pos = int(input("Введите позицию числа в ряде Фибоначчи: "))
+print("Число:", fibonacci(num_pos))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/07_advanced_sum/main.py
+def my_sum(*args):
+    def flatten(a_list):
+        result = []
+        for e in a_list:
+            if isinstance(e,int):
+                result.append(e)
+            else:
+                result.extend(flatten(e))
+        return result
+    return sum(flatten(args))
+
+
+print("Ответ:", my_sum([[1, 2, [3]], [1], 3]))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/06_deep_copy/main.py
+site = {
+    'html': {
+        'head': {
+            'title': 'Куплю/продам телефон недорого'
+        },
+        'body': {
+            'h2': 'У нас самая низкая цена на iphone',
+            'div': 'Купить',
+            'p': 'продать'
+        }
+    }
+}
+
+
+def struct_make(phone_name, title_value, h2_value):
+    global site
+    site.get('html').get('head')['title'] = title_value.format(
+        phone=phone_name
+    )
+    site.get('html').get('head')['h2'] = h2_value.format(
+        phone=phone_name
+    )
+    return site
+
+
+def making_site(count):
+    if count > 0:
+        name = input("Введите название продукта для нового сайта: ")
+        title_for_site = "Куплю/продам {phone} недорого"
+        h2_for_site = "У нас самая низкая цена на {phone}"
+        new_struct = struct_make(name, title_for_site, h2_for_site)
+        print("Сайт для {phone}\n".format(
+            phone=name
+        ), new_struct)
+        count -= 1
+        return making_site(count)
+
+
+site_count = int(input("Сколько сайтов: "))
+making_site(site_count)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module21/04_search_element_2/main.py
+site = {
+    'html': {
+        'head': {
+            'title': 'Мой сайт'
+        },
+        'body': {
+            'h2': 'Здесь будет мой заголовок',
+            'div': 'Тут, наверное, какой-то блок',
+            'p': 'А вот здесь новый абзац'
+        }
+    }
+}
+
+
+def key_search(struct, word, deep=None):
+    if deep is not None:
+        if deep == 1:
+            return struct.get(word, None)
+        deep -= 1
+    if word in struct:
+        return struct[word]
+
+    for sub_struct in struct.values():
+        if isinstance(sub_struct, dict):
+            result = key_search(sub_struct, word, deep)
+            if result:
+                break
+    else:
+        result = None
+
+    return result
+
+
+key = input("Введите искомый ключ: ")
+length_deep = None
+if input("Хотите ввести максимальную глубины? (Y/N): ").upper() == "Y":
+    length_deep = int(input("Введите максимальную глубины: "))
+    print(key_search(site, key, length_deep))
+else:
+    print(key_search(site, key))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/05_movie/main.py
+films = ['Крепкий орешек', 'Назад в будущее', 'Таксист',
+         'Леон', 'Богемская рапсодия', 'Город грехов',
+         'Мементо', 'Отступники', 'Деревня']
+loveFilms = []
+
+while True:
+    userFilm = input('Ваш фильм: ')
+    if userFilm in loveFilms:
+        print('Уже добавили.')
+    elif userFilm in films:
+        loveFilms.append(userFilm)
+    elif userFilm == 'q':
+        break
+    else:
+        print('Ошибка добавления. Такого фильма нет.')
+
+print('\nВаши любимые фильмы:', loveFilms)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/07_containers/main.py
+def listMaker(number):
+    global boxVeightList
+
+    for _ in range(number):
+        temp = input('Введите вес контейнера: ')
+        while float(temp) != int(temp) or int(temp) > 200:
+            print(temp, int(temp))
+            temp = input('Попробуйте еще раз! Вес должен быть целым и не превышать 200: ')
+
+        boxVeightList.append(int(temp))
+
+
+boxCounter = int(input('Введите кол-во контейнеров: '))
+boxVeightList = []
+counter = 0
+
+if boxCounter > 200 or boxCounter != int(boxCounter):
+    print('Программа будет закрыта! Введеное число больше 200 или не целое.')
+else:
+    listMaker(boxCounter)
+
+newBox = input('\nВведите вес нового контейнера: ')
+while float(newBox) != int(newBox) or int(newBox) > 200:
+    newBox = input('Вес нового контейнера введен не корректно'
+                   ' или превышает 200! Попробуйте еще раз: ')
+
+for i in boxVeightList:
+    if i < int(newBox) > boxVeightList[counter - 1]:
+        print('\nНомер, куда встанет новый контейнер:', counter)
+        break
+    else:
+        counter += 1
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/10_sort/main.py
+userList = input('Введите список (через пробел): ').split()
+output = ''
+
+for x in range(len(userList)):
+    userList[x] = int(userList[x])
+
+for x in range(len(userList)):
+    temp = min(userList)
+    userList.remove(temp)
+    output += str(temp) + ' '
+
+print('Отсортированный список:', output.split())
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/06_word_analysis/main.py
+def uniqueness_test(string):
+    answer = 0
+    temp = False
+    for i in range(len(string)):
+        for x in range(len(string)):
+            if string[i] == string[x] and x != i:
+                temp = True
+
+        if temp != True:
+            answer += 1
+        else:
+            temp = False
+
+    return answer
+
+
+user_string = input('Введите слово: ')
+user_string_list = list(user_string)
+
+print('Кол-во уникальных букв:', uniqueness_test(user_string_list))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/02_tournament/main.py
+nameList = ['Артемий', 'Борис', 'Влад', 'Гоша', 'Дима', 'Евгений', 'Женя', 'Захар']
+index = 0
+outputList = []
+
+for x in nameList:
+    if index % 2 == 0:
+        outputList.append(x)
+    index += 1
+
+print(outputList)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/08_running_nums/main.py
+step = int(input('Введите сдвиг: '))
+userList = input('Изначальный список (через пробел): ').split()
+output = []
+
+for i in range(-step, 0):
+    output.append(int(userList[i]))
+
+for i in range(step - 1):
+    output.append(int(userList[i]))
+
+print('Сдвинутый список:', output)
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/01_list_gen/main.py
+n = int(input('Введите целое число: '))
+simpleNumbers = []
+
+for i in range(1, n + 1):
+    if i % 2 != 0:
+        simpleNumbers.append(i)
+
+print(simpleNumbers)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/04_videocards/main.py
+videocardsCount = int(input('Кол-во видеокарт: '))
+videocardsList = []
+newVideocardsList = []
+
+
+def maxVideocardsSeries(cardsList):
+    temp = cardsList[0]
+    for y in cardsList:
+        if y > temp:
+            temp = y
+    return temp
+
+
+for x in range(videocardsCount):
+    print(x + 1, 'Видеокарта:', end=' ')
+    videocardsList.append(input())
+
+temp = maxVideocardsSeries(videocardsList)
+for i in videocardsList:
+    if temp > i:
+        newVideocardsList.append(i)
+
+print('\nСтарый список видеокарт:', videocardsList)
+print('Новый список видеокарт:', newVideocardsList)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/03_cells/main.py
+# ранг же идет с 1, тогда сравнивать буду с индекс + 1
+badCells = ''
+
+cellCount = int(input('Кол-во клеток: '))
+for i in range(cellCount):
+    print('Эффективность', i + 1, 'клетки:', end=' ')
+    temp = int(input())
+    if i + 1 > temp:
+        badCells += ' ' + str(temp)
+
+print('Неподходящие значения:' + badCells)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module15/09_word_analysis_2/main.py
+def analysis(text):
+    text = list(text)
+    temp = ''
+    for x in range(-1, -len(text) - 1, -1):
+        temp += text[x]
+    return temp
+
+
+word = input('Введите слово: ')
+if word == analysis(word):
+    print('Слово является палиндромом')
+else:
+    print('Слово не является палиндромом')
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/06_list_compression/main.py
+import random
+
+
+def list_compression(user_list):
+    custom_list = user_list[:]
+    for i_num in user_list:
+        if i_num == 0:
+            custom_list.append(custom_list.pop(custom_list.index(i_num)))
+
+    while custom_list[-1] == 0:
+        custom_list.pop(-1)
+
+    return custom_list
+
+
+list_len = int(input('Кол-во чисел в списке: '))
+num_list = [random.randint(0, 2) for _ in range(list_len)]
+
+print("Список до сжатия:", num_list)
+print("Список после сжатия:", list_compression(num_list))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/08_entertainment/main.py
+import random
+
+
+def cast(sticks_count):
+    temp = 1
+    left_i = random.randint(temp, sticks_count - 1)
+    temp = left_i
+    right_i = random.randint(temp, sticks_count - 1)
+
+    return [left_i, right_i]
+
+
+def result():
+    temp = ''
+    for i_elem in sticks_list:
+        if i_elem == 0:
+            temp += '.'
+        else:
+            temp += 'I'
+
+    return temp
+
+
+n_sticks = int(input("Кол-во палок: "))
+k_stones = int(input("Кол-во бросков: "))
+sticks_list = [i_num for i_num in range(n_sticks)]
+
+for i_cast in range(k_stones):
+    borders = cast(n_sticks)
+    sticks_list[borders[0]:borders[1]] = [0] * (borders[1] - borders[0])
+    print(f"Бросок {i_cast + 1}. Сбиты палки с номера {borders[0]} по номер {borders[1]}")
+
+print("\nРезультат:", result())
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/10_caesar_cipher/main.py
+alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+
+print("Программа принимает текст только в нижнем регистре и только на русском языке.")
+user_msg = input('\nВведите сообщение: ')
+key = int(input("Введите сдвиг: "))
+
+crypt_msg = "".join([(alphabet[(alphabet.index(i_elem) + key) % len(alphabet)]
+                      if i_elem in alphabet else i_elem)
+                     for i_elem in user_msg])
+
+print(crypt_msg)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/02_generation/main.py
+user_num = int(input('Введите длину списка: '))
+
+result = [(1 if i_num % 2 == 0 else i_num % 5) for i_num in range(user_num)]
+
+print('Результат:', result)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/07_two_dimensional_list/main.py
+t_d_list = [[i_num + j_num for j_num in range(0, 9, 4)] for i_num in range(1, 5)]
+
+print(t_d_list)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/04_slices/main.py
+alphabet = 'abcdefg'
+
+print(f"1: {alphabet[:]}"
+      f"\n2: {alphabet[::-1]}"
+      f"\n3: {alphabet[::2]}"
+      f"\n4: {alphabet[1::2]}"
+      f"\n5: {alphabet[:1]}"
+      f"\n6: {alphabet[:-2:-1]}"
+      f"\n7: {alphabet[3:4]}"
+      f"\n8: {alphabet[-3::]}"
+      f"\n9: {alphabet[3:5]}"
+      f"\n10: {alphabet[4:2:-1]}")
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/01_vowels/main.py
+vowels = ['у', 'е', 'ё', 'ы', 'а', 'о', 'э', 'я', 'и', 'ю',
+          'У', 'Е', 'Ё', 'Ы', 'А', 'О', 'Э', 'Я', 'И', 'Ю']
+
+user_str = input('Введите текст: ')
+
+vowels_in_str = [i_elem for i_elem in user_str if i_elem in vowels]
+
+print(f"Список гласных букв: {vowels_in_str} \nДлина списка: {len(vowels_in_str)}")
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/05_reversal/main.py
+user_str = input('Введите строку: ')
+str_reverse_copy = user_str[::-1]
+
+start = user_str.index('h') + 1
+stop = -(str_reverse_copy.index('h'))
+output = user_str[start:stop - 1]
+
+print(output[::-1])
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/03_random_competition/main.py
+import random as rnd
+
+first_group = [round(rnd.uniform(5, 10), 2) for _ in range(20)]
+second_group = [round(rnd.uniform(5, 10), 2) for _ in range(20)]
+
+group_winners = [max(first_group[i_num], second_group[i_num]) for i_num in range(20)]
+
+print(f"Первая команда: {first_group}"
+      f"\nВторая команда: {second_group}"
+      f"\nПобедители тура: {group_winners}")
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module17/09_list_of_lists_2/main.py
+nice_list = [[[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+             [[10, 11, 12], [13, 14, 15], [16, 17, 18]]]
+
+nice_list = [x for i_letter in nice_list for i_list in i_letter for x in i_list]
+
+print(nice_list)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/03_details/main.py
+shop = [['каретка', 1200], ['шатун', 1000], ['седло', 300],
+        ['педаль', 100], ['седло', 1500], ['рама', 12000],
+        ['обод', 2000], ['шатун', 200], ['седло', 2700]]
+
+
+def get_price(sublist):
+    for elem in sublist:
+        if isinstance(elem, int):
+            return elem
+
+
+nameOfDetail = input('Название детали: ')
+price = 0
+
+for pair in shop:
+    if nameOfDetail in pair:
+        price += get_price(pair)
+
+detailCount = int(input('\nКол-во деталей - '))
+print(f'Общая стоимость - {price}')
+
+# Именно в этом файле у меня сломались отступы... не знаю причин
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/10_simmetrical_seq/main.py
+def is_palindrome(nums):
+    nums_reverse = []
+    for index_num in range(len(nums) -1, -1, -1):
+        nums_reverse.append(nums[index_num])
+    if nums == nums_reverse:
+        return True
+    else:
+        return False
+
+
+list_numbers = []
+answer = []
+
+for i_num in range(int(input('Сколько будет чисел? '))):
+    list_numbers.append(int(input(f'Число {i_num + 1}: ')))
+
+original_list_numbers = list_numbers
+while len(list_numbers) != 0:
+    if is_palindrome(list_numbers):
+        break
+    else:
+        answer.append(list_numbers[0])
+        list_numbers.pop(0)
+
+print('\nПоследовательность:', original_list_numbers)
+print('Нужно приписать чисел:', len(answer))
+answer.reverse()
+print('Сами числа:', answer)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/05_songs/main.py
+def time_found(sublist):
+    for elem in sublist:
+        if isinstance(elem, float):
+            return elem
+
+
+violator_songs = [
+    ['World in My Eyes', 4.86],
+    ['Sweetest Perfection', 4.43],
+    ['Personal Jesus', 4.56],
+    ['Halo', 4.9],
+    ['Waiting for the Night', 6.07],
+    ['Enjoy the Silence', 4.20],
+    ['Policy of Truth', 4.76],
+    ['Blue Dress', 4.29],
+    ['Clean', 5.83]
+]
+
+song_count = int(input('Сколько песен выбрать? '))
+playlist_time = 0
+
+for x in range(3):
+    temp = playlist_time
+    name = input(f'Название {x + 1} песни: ')
+    for pair in violator_songs:
+        if name in pair:
+            playlist_time += time_found(pair)
+    if temp == playlist_time:
+        print('Ошибка, похоже такой песни нет в списке общих песен.')
+
+
+print(f'\nОбщая продолжительность нового плейлиста: {round(playlist_time, 2)} минут')
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/07_roller_skates/main.py
+n = []
+k = []
+people_count = 0
+n_count = int(input('Кол-во коньков: '))
+for x in range(n_count):
+    n.append(int(input(f'Размер {x + 1} пары: ')))
+
+k_count = int(input('\nКол-во людей: '))
+for x in range(k_count):
+    k.append(int(input(f'Размер ноги {x + 1} человека: ')))
+
+for x in n:
+    for y in k:
+        if x >= y:
+            people_count += 1
+            break
+
+print('\nНаибольшее кол-во людей, которые могут взять ролики:', people_count)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/04_party/main.py
+guests = ['Петя', 'Ваня', 'Саша', 'Лиза', 'Катя']
+guest_doing = ''
+guest_name = ''
+
+while True:
+    print(f'Сейчас на вечеринке {len(guests)} человек: {guests}')
+    guest_doing = input('Гость пришел или ушел? ')
+    if guest_doing == 'Пора спать':
+        break
+    guest_name = input('Имя гостя: ')
+    if guest_doing == 'пришел' and len(guests) + 1 > 6:
+        print(f'Прости, {guest_name}, но мест нет.')
+    elif guest_doing == 'пришел' and len(guests) + 1 <= 6:
+        print(f'Привет, {guest_name}!')
+        guests.append(guest_name)
+    elif guest_doing == 'ушел' and guest_name in guests:
+        print(f'Пока, {guest_name}!')
+        guests.remove(guest_name)
+    elif guest_doing == 'ушел' and guest_name not in guests:
+        print('Такого имени нет в списке гостей, находящихся сейчас в доме!')
+    else:
+        print('Я не понял этой команды.')
+    print()
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/06_unique_elems/main.py
+list1 = []
+list2 = []
+unique_list = []
+
+print('Ввод чисел первого списка: ')
+for _ in range(3):
+    x = int(input(f'{_ + 1} элемент списка: '))
+    list1.append(x)
+
+print('\nВвод чисел второго списка: ')
+for _ in range(7):
+    x = int(input(f'{_ + 1} элемент списка: '))
+    list2.append(x)
+
+list1.extend(list2)
+
+for number in list1:
+    if number in unique_list:
+        continue
+    else:
+        unique_list.append(number)
+
+print('\nНовый первый список с уникальными элементами:', unique_list)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/08_rhyme_cnt/main.py
+n = int(input('Кол-во человек: '))
+k = int(input('Какое число в считалке? '))
+print('Значит, выбывает каждый', k, 'человек')
+
+n_list = []
+for i_num in range(1, n + 1):
+    n_list.append(i_num)
+
+index_removing = 0
+while len(n_list) > 1:
+    print('\nТекущий круг людей:', n_list)
+    start = index_removing % len(n_list)
+    print('Начало счета с номера', start)
+
+    index_removing = (start + k - 1) % len(n_list)
+    print('Выбывает человек под номером', n_list[start])
+    n_list.remove(n_list[index_removing])
+
+print('\nОстался человек под номером', n_list[0])
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/09_friends/main.py
+friends_cnt = int(input('Кол-во друзей: '))
+receipt_cnt = int(input('Долговых расписок: '))
+
+friends_list = []
+for i_friend in range(friends_cnt):
+    friends_list.append([i_friend + 1, 0])
+    # friends_list[i_friend].append(0)
+
+for i_receipt in range(receipt_cnt):
+    print(f'\n{i_receipt + 1} расписка')
+    to_whom = int(input('Кому: '))
+    by_whom = int(input('От кого: '))
+    summ = int(input('Сколько: '))
+    friends_list[to_whom - 1][1] -= summ
+    friends_list[by_whom - 1][1] += summ
+
+print('\nБаланс друзей:')
+for x in friends_list:
+    print(f'{x[0]}: {x[1]}')
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/02_line/main.py
+first = []
+second = []
+
+for i in range(160, 177, 2):
+    first.append(i)
+
+for i in range(162, 181, 3):
+    second.append(i)
+
+first.extend(second)
+first.sort()
+
+print('Отсортированный список:', first)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module16/01_scary_code/main.py
+a = [1, 5, 3]
+b = [1, 5, 1, 5]
+c = [1, 3, 1, 5, 3, 3]
+
+a.extend(b)
+print(f'Кол-во цифр 5 при первом объединении: {a.count(5)}')
+
+for i in range(a.count(5)):
+    a.remove(5)
+
+a.extend(c)
+print(f'Кол-во цифр 3 при первом объединении: {a.count(3)}')
+
+print('Итоговый список:', a)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/05_password/main.py
+def check(string):
+    alphabet_lower = 'abcdefghigklmnopqrstuvwxyz'
+    alphabet_upper = alphabet_lower.upper()
+    numbers = '0123456789'
+    symbol_count = [0, 0, 0]
+
+    for i_elem in string:
+        if i_elem in alphabet_lower:
+            symbol_count[0] += 1
+            # Это на будущее, если придется вести учет спец. символов (вычесть
+            # сумму всех знаков из длины пароля)
+        elif i_elem in alphabet_upper:
+            symbol_count[1] += 1
+        elif i_elem in numbers:
+            symbol_count[2] += 1
+
+        if symbol_count[1] >= 1 and symbol_count[2] >= 3 and len(string):
+            return True
+        else:
+            return False
+
+
+while True:
+    password = input('Придумайте пароль: ')
+
+    if check(password):
+        print('Это надёжный пароль!')
+        break
+    else:
+        print('Пароль ненадёжный. Попробуйте ещё раз.')
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/06_compression/main.py
+user_string = input('Введите строку: ')
+symbol = user_string[0]
+count = 0
+new_string = ''
+
+for i_elem in user_string:
+    if i_elem != symbol:
+        new_string += symbol + str(count)
+        symbol = i_elem
+        count = 1
+    else:
+        count += 1
+new_string += symbol + str(count)
+
+print(new_string)
+
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/02_longest_word/main.py
+word_list = input('Введите строку: ').split()
+big_word = ['']
+
+for i_word in word_list:
+    if len(i_word) > len(big_word[0]):
+        big_word[0] = i_word
+
+print('Самое длинное слово:', big_word[0])
+print('Длина этого слова:', len(big_word[0]))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/10_the_truth/main.py
+text_in = input('Введите сообщение: ').split()
+alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+sym = [' ', ' ', '+', '*', '-', ',', '(', "'", '..', '--', '"', '!', '/', '\n']
+new_text = []
+key = 3
+
+for letter in text_in:
+    new_letter = [alphabet[alphabet.find(i) - 1]
+                  if i not in sym else sym[sym.index(i) + 1] for i in letter]
+    shift_text = ''.join(new_letter[- key % len(new_letter):] + new_letter[:- key % len(new_letter)])
+    if shift_text.endswith("\n"):
+        key += 1
+        new_text.append(shift_text)
+    else:
+        new_text.append(shift_text)
+
+print(' '.join(new_text))
+
+# помогли в чате
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/01_restaurant_menu/main.py
+menu_before = input('Доступное меню: ').split(';')
+menu_after = ', '.join(menu_before[:])
+
+print('На данный момент в меню есть:', menu_after)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/04_capital_letters/main.py
+user_string = input('Введите строку: ').lower().split()
+
+user_string = [i_elem[0].upper() + i_elem[1:] for i_elem in user_string]
+# for i_elem in range(len(user_string)):
+#     user_string[i_elem] = user_string[i_elem][0].upper() + user_string[i_elem][1:]
+
+
+print('Результат:', ' '.join(user_string))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/09_message/main.py
+def reverse(word_list):
+    temp = ''
+    for i_word in word_list:
+        for j_elem in i_word:
+            if j_elem.isalpha():
+                temp = j_elem + temp
+            else:
+                temp += j_elem
+        word_list[word_list.index(i_word)] = temp
+        temp = ''
+
+
+message = input('Сообщение: ').split()
+
+reverse(message)
+print('Новое сообщение:', ' '.join(message))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/07_ip_adress_2/main.py
+ip_address = input('Введите IP: ').split('.')
+
+for i_okt in ip_address:
+    if ',' in i_okt or len(ip_address) > 4:
+        print('Адрес - это четыре числа, разделенные точками')
+        break
+    elif not i_okt.isdigit():
+        print('{} - не целое число'.format(
+            i_okt
+        ))
+        break
+    elif int(i_okt) > 255:
+        print('{} превышает 255'.format(
+            i_okt
+        ))
+        break
+    elif i_okt == ip_address[-1]:
+        print('IP-адрес корректен')
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/08_ticker/main.py
+def check(string1, string2):
+    if (len(string1) != len(string2)) or (any(i_elem not in string2 for i_elem in string1)):
+        return '\nПервую строку нельзя получить из второй с помощью циклического сдвига.'
+
+    for i_num in range(len(string1)):
+        temp = string2[i_num:] + string2[:i_num]
+        if string1 == temp:
+            return '\nПервая строка получается из второй со сдвигом {}'.format(
+                i_num
+            )
+
+    return '\nПервую строку нельзя получить из второй с помощью циклического сдвига.'
+
+
+first_string = input('Первая строка: ')
+second_string = input('Вторая строка: ')
+
+print(check(first_string, second_string))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module18/03_files/main.py
+special_symbol = '@№$%^&*()'
+file_end = ['.txt', '.docx']
+
+filename = input('Название файла: ')
+
+if any(filename.startswith(i_symbol) for i_symbol in special_symbol):
+    print('Ошибка: название начинается на один из специальных символов')
+elif not any(filename.endswith(i_symbol) for i_symbol in file_end):
+    print('Ошибка: неверное расширение файла. Ожидалось {0} или {1}'.format(
+        file_end[0],
+        file_end[1]
+    ))
+else:
+    print('Файл назван верно.')
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/09_pedigree/main.py
+pair_count = int(input("Введите количество человек: "))
+pair_dict = dict()
+
+for i_num in range(1, pair_count):
+    temp_pair = input("{} пара: ".format(
+        i_num
+    )).split()
+    if temp_pair[0] not in pair_dict:
+        pair_dict[temp_pair[0]] = 0
+    if temp_pair[1] not in pair_dict:
+        pair_dict[temp_pair[1]] = 0
+
+    pair_dict[temp_pair[0]] = pair_dict[temp_pair[1]] + 1
+
+print('''"Высота" каждого члена семьи:''')
+for i_key in sorted(pair_dict.keys()):
+    print("{key} {value}".format(
+        key=i_key,
+        value=pair_dict[i_key]
+    ))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/06_synonym_dict/main.py
+def synonym(word):
+    for i_key, i_value in synonym_dict.items():
+        if i_key.lower() == word.lower():
+            return i_value
+        elif i_value.lower() == word.lower():
+            return i_key
+
+
+synonym_dict = dict()
+synonym_count = int(input("Кол-во пар слов: "))
+
+for i_num in range(synonym_count):
+    print("{} пара:".format(
+        i_num + 1
+    ), end=" ")
+    pair = input().split()
+    synonym_dict[pair[0]] = pair[-1]
+
+while True:
+    search_word = input("\nВведите слово: ")
+    if search_word not in synonym_dict.keys() and search_word not in synonym_dict.values():
+        print("Такого слово в словаре нет.")
+    else:
+        print("Синоним: {}".format(
+            synonym(search_word)
+        ))
+        break
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/01_songs_2/main.py
+violator_songs = {
+    'World in My Eyes': 4.86,
+    'Sweetest Perfection': 4.43,
+    'Personal Jesus': 4.56,
+    'Halo': 4.9,
+    'Waiting for the Night': 6.07,
+    'Enjoy the Silence': 4.20,
+    'Policy of Truth': 4.76,
+    'Blue Dress': 4.29,
+    'Clean': 5.83
+}
+
+song_count = int(input('Сколько будет песен? '))
+output = 0
+for i_num in range(1, song_count + 1):
+    name = input("Название {} песни: ".format(
+        i_num
+    ))
+    output += violator_songs.get(name, 0)
+
+print("\nОбщее время звучания песен: {}".format(
+    output
+))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/07_pizza/main.py
+order_count = int(input("Введите кол-во заказов: "))
+order_dict = dict()
+
+for i_order in range(order_count):
+    temp_list = input("{} заказ: ".format(
+        i_order + 1
+    )).split()
+    if temp_list[0] not in order_dict:
+        order_dict[temp_list[0]] = dict()
+        order_dict[temp_list[0]][temp_list[1]] = 0
+    elif temp_list[1] not in order_dict[temp_list[0]]:
+        order_dict[temp_list[0]][temp_list[1]] = 0
+
+    order_dict[temp_list[0]][temp_list[1]] += int(temp_list[-1])
+
+print()
+for i_key, i_value in order_dict.items():
+    print("{key}:".format(
+        key=i_key
+    ))
+    for j_key, j_value in i_value.items():
+        print("{space}{pizza}: {amount}".format(
+            space='  ' * 8,
+            pizza=j_key,
+            amount=j_value
+        ))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/08_guess_number/main.py
+max_num = int(input("Максимальное число: "))
+nums = set()
+
+for i_count in range(max_num):
+    print()
+    user_input = input("Нужное число есть среди вот этих чисел: ")
+    if user_input == "Помогите!" or len(nums) == 1:
+        print("Артём мог загадать следующие числа: {}".format(
+            nums
+        ))
+        break
+    author_answer = input("Ответа Артёма: ")
+    user_input = set(user_input.split())
+    if author_answer.lower() == "да":
+        nums.update(user_input)
+    elif author_answer.lower() == "нет":
+        nums -= user_input
+    else:
+        print("Ответ не распознан.")
+
+# Есть подозрения, что программа не доделана
+import random
+
+
+count = int(input('Введите максимальное число: '))
+secret = random.randint(0, count)
+numbers = set()
+while True:
+    string = input('Нужное число есть среди вот этих чисел: ')
+    if 'помогите' == string.lower():
+        nums = set([x for x in range(count + 1)])
+        print(f'Артём мог загадать следующие числа: {nums.difference(numbers)}')
+        break
+    set_numbers = set([int(x) for x in string.split() if x.isdigit() and 0 <= int(x) <= count])
+    if secret not in set_numbers:
+        print(f'Ответ Артёма: Нет')
+        numbers = numbers.union(set_numbers)
+    elif len(set_numbers) == 1 and secret in set_numbers:
+        print(f'Отгадал, секретное число: {secret}')
+        break
+    elif secret in set_numbers:
+        print('Ответ Артёма: Да')
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/02_geography/main.py
+country_count = int(input('Сколько будет стран? '))
+country_dict = dict()
+
+for i_int in range(country_count):
+    user_input = input("{} страна: ".format(
+        i_int + 1
+    )).split()
+    country_dict[user_input[0]] = user_input[1:]
+
+for i_int in range(3):
+    city = input("\n{} город: ".format(
+        i_int + 1
+    ))
+
+    for country, cities in country_dict.items():
+        if city in cities:
+            print("Город {} расположен в стране {}.".format(
+                city,
+                country
+            ))
+            temp_flag = True
+            break
+        else:
+            temp_flag = False
+
+    if not temp_flag:
+        print("По городу {} данных нет.".format(
+            city
+        ))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/05_frequency_hist_2/main.py
+def histogram(text):
+    hist = dict()
+    for i_elem in text:
+        if i_elem in hist:
+            hist[i_elem] += 1
+        else:
+            hist[i_elem] = 1
+
+    return hist
+
+
+def invert(dictionary):
+    hist_invert = dict()
+    for i_key, i_value in dictionary.items():
+        if i_value in hist_invert:
+            hist_invert[i_value].append(i_key)
+        else:
+            hist_invert[i_value] = [i_key]
+
+    return hist_invert
+
+
+user_string = input("Введите текст: ")
+original_hist = histogram(user_string)
+
+print("Оригинальный список частот:")
+for i_key, i_value in original_hist.items():
+    print("{key} : {value}".format(
+        key=i_key,
+        value=i_value
+    ))
+
+print("\nИнвертированный словарь частот:")
+for i_key, i_value in invert(original_hist).items():
+    print("{key} : {value}".format(
+        key=i_key,
+        value=i_value
+    ))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/03_cryptocurrency/main.py
+data = {
+    "address": "0x544444444444",
+    "ETH": {
+        "balance": 444,
+        "total_in": 444,
+        "total_out": 4
+    },
+    "count_txs": 2,
+    "tokens": [
+        {
+            "fst_token_info": {
+                "address": "0x44444",
+                "name": "fdf",
+                "decimals": 0,
+                "symbol": "dsfdsf",
+                "total_supply": "3228562189",
+                "owner": "0x44444",
+                "last_updated": 1519022607901,
+                "issuances_count": 0,
+                "holders_count": 137528,
+                "price": False
+            },
+            "balance": 5000,
+            "totalIn": 0,
+            "total_out": 0
+        },
+        {
+            "sec_token_info": {
+                "address": "0x44444",
+                "name": "ggg",
+                "decimals": "2",
+                "symbol": "fff",
+                "total_supply": "250000000000",
+                "owner": "0x44444",
+                "last_updated": 1520452201,
+                "issuances_count": 0,
+                "holders_count": 20707,
+                "price": False
+            },
+            "balance": 500,
+            "totalIn": 0,
+            "total_out": 0
+        }
+    ]
+}
+
+print("Список ключей: {data_keys}\nСписок значений: {data_values}".format(
+    data_keys=data.keys(),
+    data_values=data.values()
+))
+data['ETH']['total_diff'] = 100
+data['tokens'][0]['fst_token_info']['name'] = 'doge'
+data['ETH']['total_out'] = data['tokens'][0].pop('total_out')
+data['tokens'][1]['sec_token_info']['total_price'] = data['tokens'][1]['sec_token_info'].pop('price')
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/04_goods/main.py
+goods = {
+    'Лампа': '12345',
+    'Стол': '23456',
+    'Диван': '34567',
+    'Стул': '45678',
+}
+
+store = {
+    '12345': [
+        {'quantity': 27, 'price': 42},
+    ],
+    '23456': [
+        {'quantity': 22, 'price': 510},
+        {'quantity': 32, 'price': 520},
+    ],
+    '34567': [
+        {'quantity': 2, 'price': 1200},
+        {'quantity': 1, 'price': 1150},
+    ],
+    '45678': [
+        {'quantity': 50, 'price': 100},
+        {'quantity': 12, 'price': 95},
+        {'quantity': 43, 'price': 97},
+    ],
+}
+
+for i_name, j_code in goods.items():
+    temp_sum = 0
+    temp_count = 0
+    for x_elem in store[j_code]:
+        temp_count += x_elem['quantity']
+        temp_sum += x_elem['price'] * x_elem['quantity']
+    print("{name} - {count} шт, стоимость {price} руб".format(
+        name=i_name,
+        count=temp_count,
+        price=temp_sum
+    ))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module19/10_palindrome_again/main.py
+user_string = input("Введите строку: ")
+elem_dict = dict()
+for i_elem in user_string:
+    if i_elem in elem_dict:
+        elem_dict[i_elem] += 1
+    else:
+        elem_dict[i_elem] = 1
+
+odd_num_count = 0
+for i_value in elem_dict.values():
+    if i_value % 2 != 0:
+        odd_num_count += 1
+
+if odd_num_count > 1:
+    print("Нельзя сделать палиндромом")
+else:
+    print("Можно сделать палиндромом")
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/01_code_review/main.py
+students = {
+    1: {
+        'name': 'Bob',
+        'surname': 'Vazovski',
+        'age': 23,
+        'interests': ['biology, swimming']
+    },
+    2: {
+        'name': 'Rob',
+        'surname': 'Stepanov',
+        'age': 24,
+        'interests': ['math', 'computer games', 'running']
+    },
+    3: {
+        'name': 'Alexander',
+        'surname': 'Krug',
+        'age': 22,
+        'interests': ['languages', 'health food']
+    }
+}
+
+
+def list_student(dictionary):
+    lst_interesting = []
+    surname_len = 0
+    for j_elem in dictionary:
+        lst_interesting.append(dictionary[j_elem].get('interests'))
+        surname_len += len(dictionary[j_elem].get('surname', '0'))
+
+    return lst_interesting, surname_len
+
+
+print("""Список пар "ID студента - Возраст": """, end=' ')
+for i_elem in students:
+    print((i_elem, students[i_elem]['age']), end=' ')
+
+print("\nПолный список интересов всех студентов:", end=' ')
+lst_interest, surname_lens = list_student(students)
+for x_elem in students:
+    print(lst_interest[x_elem - 1], end=' ')
+
+print("\nОбщая длина всех фамилий студентов:", surname_lens)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/02_universal_prog_2/main.py
+import sympy
+
+
+def crypto(iterable):
+    output = [i_elem for i_num, i_elem in enumerate(iterable) if sympy.isprime(i_num)]
+    return output
+
+
+print(crypto([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+print(crypto('О Дивный Новый мир!'))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/07_sort_function/main.py
+def tpl_sort(tpl):
+    for i_elem in tpl:
+        if not isinstance(i_elem, int):
+            return tpl
+
+    return tuple(sorted(tpl))
+
+
+# a = (2, 3, 5, 8, -4, 0, 1)
+print(tpl_sort((2, 3, 'a', 8, -4, 0, 1)))
+print(tpl_sort((2, 3, 9, 8, -4, 0, 1)))
+# в задании просто перечислены числа, но надо или переменную или все числа еще в одни скобки
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/09_competition_protocol/main.py
+def add_score(numbers_of_times, dictionary):
+    for i_count in range(numbers_of_times):
+        temp_score = input("{} запись: ".format(
+            i_count + 1
+        )).split()
+        if (temp_score[1] not in dictionary) or (temp_score[1] in dictionary
+                                                 and dictionary[temp_score[1]] < int(temp_score[0])):
+            key = temp_score[1], i_count + 1
+            # имя и какой по счету в протоколе
+            dictionary[key] = int(temp_score[0])
+
+
+def win_search(dictionary):
+    win_list = list()
+    for i_key, i_value in dictionary.items():
+        if i_key in win_list and i_value:
+
+    win_sort_print(win_list)
+
+
+def win_sort_print(win_list):
+    win_list = dict(win_list)
+    i_num = 1
+    print(win_list)
+    for i_name, i_score in win_list.items():
+        print("{numm} место: {name} {score}".format(
+            numm=i_num,
+            name=i_name,
+            score=i_score
+        ))
+        i_num += 1
+
+
+protocol_count = int(input("Сколько записей вносится в протокол? "))
+protocol_dict = dict()
+print("Записи (результат и имя):")
+add_score(protocol_count, protocol_dict)
+print("Итоги соревнований:")
+win_search(protocol_dict)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/04_players/main.py
+players = {
+    ("Ivan", "Volkin"): (10, 5, 13),
+    ("Bob", "Robbin"): (7, 5, 14),
+    ("Rob", "Bobbin"): (12, 8, 2)
+}
+
+players_zip = [tuple(i_key + i_value) for i_key, i_value in players.items()]
+print(players_zip)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/05_one_family/main.py
+# кортеж для примера, чтоб проверить программу
+
+family = {
+    ('Сидоров', 'Никита'): 35,
+    ('Сидорова', 'Алина'): 34,
+    ('Сидоров', 'Павел'): 10,
+    ('Петров', 'Вася'): 25,
+    ('Петрова', 'Василиса'): 24
+}
+
+surname = input("Введите фамилию: ")
+print()
+for i_key, i_value in family.items():
+    if surname.lower() in i_key[0].lower():
+        print("{key} {key2} {value}".format(
+            key=i_key[0],
+            key2=i_key[1],
+            value=i_value
+        ))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/06_pairs/main.py
+import random
+
+original_list = [random.randint(0, 10) for _ in range(10)]
+print("Оригинальный список:", original_list)
+
+# 1 способ
+original_list_1 = original_list[:]
+custom_list_1 = [(original_list_1.pop(0), original_list_1.pop(0)) for _ in range(5)]
+
+print("Первый способ:", custom_list_1)
+
+# 2 способ
+original_list_2 = original_list[:]
+custom_list_2 = list()
+for _ in range(5):
+    custom_list_2.append(tuple(original_list_2[0:2]))
+    del original_list_2[0:2]
+
+print("Второй способ:", custom_list_2)
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/10_my_zip/main.py
+def my_zip(first, second):
+    new_object = ((first[i_elem], second[i_elem]) for i_elem in range(min(len(first), len(second))))
+    return new_object
+
+
+first_object = 0, 0, 8, 8, 9, 0
+second_object = ['346', 'fhj', 4]
+new = my_zip(first_object, second_object)
+print(new)
+for j_elem in new:
+    print(j_elem)
+
+# работу проверял с кортежем, строкой, списком
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/08_contacts_3/main.py
+def add_contact(contacts):
+    key = tuple(input("Введите имя и фамилию нового контакта (через пробел): ").split())
+    if key not in contacts:
+        number = int(input("Введите номер телефона (без знака +): "))
+        contacts[key] = number
+    else:
+        print("Такой человек уже есть в контактах.")
+
+
+def search_contact(contacts):
+    surname = input("Введите фамилию для поиска: ")
+    for i_key, i_value in contacts.items():
+        if surname.lower() in i_key[1].lower():
+            print("{key_1} {key_2} {numm}".format(
+                key_1=i_key[0],
+                key_2=i_key[1],
+                numm=i_value
+            ))
+
+
+contact_list = dict()
+
+
+def main():
+    user_change = int(input("Введите номер действия:"
+                            "\n   1. Добавить контакт"
+                            "\n   2. Найти человека"
+                            "\n   0. Завершить программу\n"))
+    if user_change == 0:
+        return 'СТОП'
+    elif user_change == 1:
+        add_contact(contact_list)
+    elif user_change == 2:
+        search_contact(contact_list)
+
+    print("Текущий словарь контактов:", contact_list)
+
+
+while True:
+    if main() == "СТОП":
+        break
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module20/03_function/main.py
+def slicer(iterable, number):
+    iterable = list(iterable)
+    answer = ()
+    if iterable.count(number) == 0:
+        return answer
+    elif iterable.count(number) == 1:
+        answer = tuple([i_elem for i_elem in iterable[iterable.index(number):]])
+        return answer
+    else:
+        start = iterable.index(number)
+        stop = iterable[start + 1:].index(number) + start + 2
+        answer = tuple(iterable[start:stop])
+        return answer
+
+
+print(slicer((2, 1, 3, 4, 5, 6), 1))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module14/07_years/main.py
+def output(a, b):
+    years = ''
+    for i in range(a, b + 1):
+        part1 = i // 1000
+        part2 = (i - part1 * 1000) // 100
+        part3 = (i % 100) // 10
+        part4 = i % 10
+        if (part1 == part2 == part3) \
+                or (part1 == part2 == part4) \
+                or (part1 == part3 == part4) \
+                or (part2 == part3 == part4):
+            years += '\n' + str(i)
+    return years
+
+
+years_a = int(input('Введите первый год: '))
+years_b = int(input('Введите второй год: '))
+
+print('\nГода от', years_a, 'до', years_b, 'с тремя одинаковыми цифрами:', output(years_a, years_b))
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module14/01_os_info/main.py
+import platform
+import sys
+
+info = 'OS info is \n{}\n\nPython version is {} {}'.format(
+    platform.uname(),
+    sys.version,
+    platform.architecture(),
+)
+print(info)
+
+with open('os_info.txt', 'w', encoding='utf8') as file:
+    file.write(info)
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module14/05_least_divisor/main.py
+def function(num):
+    temp = 0
+    for x in range(num, 1, -2):
+        if num % x == 0:
+            temp = x
+    return temp
+
+
+number = int(input('Введите число: '))
+print('Наименьший делитель, отличный от единыцы:', function(number))
+
+# зачтено
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module14/03_sum_and_dif/main.py
+def summa(num):
+    temp = 0
+    while num != 0:
+        temp += num % 10
+        num //= 10
+    return temp
+
+
+def count(num):
+    temp = 0
+    while num != 0:
+        temp += 1
+        num //= 10
+    return temp
+
+
+number = int(input('Введите число: '))
+numSum = summa(number)
+numCount = count(number)
+
+print('\nСумма цифр:', numSum)
+print('Кол-во цифр в числе:', numCount)
+print('Разность суммы и кол-ва цифр:', numSum - numCount)
+
+# зачтено
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module14/04_reverse_num/main.py
+def mirror(num):
+    new_num = ''
+    part1 = int(num)
+    part2 = int((num % 1) * 1e10)  # на случай если после запятой 3 или 8 цифер например
+    while part2 % 10 == 0:
+        part2 //= 10
+    # print(part2)
+    while part1 != 0:
+        new_num += str(part1 % 10)  # str для удобства складывания
+        part1 //= 10
+    new_num += '.'
+    while part2 != 0:
+        new_num += str(part2 % 10)
+        part2 //= 10
+    return new_num
+
+
+# print(mirror(102.12))
+
+
+number1 = float(input('Введите первое число: '))
+numMirror1 = mirror(number1)
+number2 = float(input('Введите второе число: '))
+numMirror2 = mirror(number2)
+
+print('\nПервое число наоборот:', numMirror1)
+print('Второе число наоборт:', numMirror2)
+print('Сумма:', float(numMirror1) + float(numMirror2))
+
+# зачтено
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module14/06_coin2/main.py
+def coin(x, y, r):
+    if x <= r and y <= r:
+        return True
+    else:
+        return False
+
+
+x_coin = float(input('X: '))
+y_coin = float(input('Y: '))
+r_searching = float(input('Введите радиус: '))
+
+if coin(x_coin, y_coin, r_searching):
+    print('\nМонетка где-то рядом')
+else:
+    print('\nМонетки в области нет')
+
+# зачтено
+
+****************************************
+/home/gremaxon/PycharmProjects/python_basic/Module14/02_session/main.py
+print("Введите первую точку")
+x1 = float(input('X1: '))
+y1 = float(input('Y1: '))
+print("\nВведите вторую точку")
+x2 = float(input('X2: '))
+while x1 == x2:
+    print('Х1 и Х2 не могут быть равны! Введите другое значение')
+    x1 = float(input('X1: '))
+    x2 = float(input('X2: '))
+y2 = float(input('Y2: '))
+
+x_diff = x1 - x2
+y_diff = y1 - y2
+k = y_diff / x_diff
+b = y2 - k * x2
+
+print("Уравнение прямой, проходящей через эти точки:")
+if k == 0:
+    print('y = ', b)
+else:
+    print("y = ", k, " * x + ", b)
+
+# зачтено
+
+****************************************
