@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="686cfb8e-f4bf-495d-81ff-10d454c9c02e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/RoadController.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/out/production/RoadController/RoadController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/out/production/RoadController/core/Camera.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/out/production/RoadController/core/Car.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/src/RoadController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/src/core/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2.2/RoadController/src/core/Car.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RoadController.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RoadController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/RoadController.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/out/production/RoadController/RoadController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/out/production/RoadController/core/Camera.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/out/production/RoadController/core/Car.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/src/RoadController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/src/core/Camera.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../module2/2.2/RoadController/src/core/Car.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26p6UI0kBhVOqAIuZsyc0293mbX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="686cfb8e-f4bf-495d-81ff-10d454c9c02e" name="Changes" comment="" />
+      <created>1648108194731</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648108194731</updated>
+    </task>
+    <servers />
+  </component>
+</project>
